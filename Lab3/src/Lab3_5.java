@@ -10,38 +10,53 @@
 import java.util.Random;
 
 public class Lab3_5 {
-
-	public static void main(String[] args) {
 		
-		Random random = new Random();
-		boolean flag = true;
-		int total = 10000;
-		
-		for(int i=0;i<10;i++) {
-			//扔骰子
-			int sum=0;
-			for(int j=0;j<3;j++) {
-				int s = random.nextInt(5)+1;
-				sum += s;
-			}
-			//判断大小
-			if(sum>=10) {
-				flag = true;
-			}else {
-				flag = false;
-			}
-			//买大小并判断正误
-			int a = random.nextInt(1);
-			if(a==1&&flag==true || a==0&&flag==false) {
-				total += 800;
-			}else {
-				total -=1000;
-			}
+		public static int throwDice(){
+			Random random = new Random();
+			int s = random.nextInt(5)+1;
+			return s;
 		}
 		
-		//输出结果
-		System.out.println("剩余的游戏币：" + total);
+		public static boolean judgeDice() {
+			boolean flag = true;
+			
+			for(int i=0;i<10;i++) {
+				int sum = 0;
+				//扔骰子
+				for(int j=0;j<3;j++) {
+					sum += throwDice();
+				}
+				
+				//判断大小
+				if(sum>=10) {
+					flag = true;
+				}else {
+					flag = false;
+				}
+			}
+			return flag;
+		}
+	
+		public static void main(String[] args) {
+		
+			int total = 10000;
+			boolean flag1;
+			//随机压大小
+			Random random = new Random();			
+			int a = random.nextInt(1);
 
-	}
+			for(int i=0;i<10;i++) {
+				flag1 = Lab3_5.judgeDice();
+				if(a==1&&flag1==true || a==0&&flag1==false) {
+					total += 800;
+				}else {
+					total -=1000;
 
+				}
+			}
+			
+			//输出结果
+			System.out.println("剩余的游戏币：" + total);
+		}
+		
 }
