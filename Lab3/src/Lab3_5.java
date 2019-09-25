@@ -1,3 +1,4 @@
+
 /*  a、骰子类名为Dice，其数值是随机的在1到6之间，具有适当的功能。
 
     b、每次扔3颗骰子，如果3个骰子的总和大于等于10，则为“大”，总和小于10则为“小”
@@ -10,53 +11,53 @@
 import java.util.Random;
 
 public class Lab3_5 {
-		
-		public static int throwDice(){
-			Random random = new Random();
-			int s = random.nextInt(5)+1;
-			return s;
-		}
-		
-		public static boolean judgeDice() {
-			boolean flag = true;
-			
-			for(int i=0;i<10;i++) {
-				int sum = 0;
-				//扔骰子
-				for(int j=0;j<3;j++) {
-					sum += throwDice();
-				}
-				
-				//判断大小
-				if(sum>=10) {
-					flag = true;
-				}else {
-					flag = false;
-				}
-			}
-			return flag;
-		}
-	
-		public static void main(String[] args) {
-		
-			int total = 10000;
-			boolean flag1;
-			//随机压大小
-			Random random = new Random();			
-			int a = random.nextInt(1);
 
-			for(int i=0;i<10;i++) {
-				flag1 = Lab3_5.judgeDice();
-				if(a==1&&flag1==true || a==0&&flag1==false) {
-					total += 800;
-				}else {
-					total -=1000;
+	public static int throwDice() {
+		Random random = new Random();
+		int s = random.nextInt(6) + 1;
+		return s;
+	}
 
-				}
+	public static boolean judgeDice() {
+		boolean flag = true;
+
+		for (int i = 0; i < 10; i++) {
+			int sum = 0;
+			// 扔骰子
+			for (int j = 0; j < 3; j++) {
+				sum += throwDice();
 			}
-			
-			//输出结果
-			System.out.println("剩余的游戏币：" + total);
+
+			// 判断大小
+			if (sum >= 10) {
+				flag = true;
+			} else {
+				flag = false;
+			}
 		}
-		
+		return flag;
+	}
+
+	public static void main(String[] args) {
+
+		int total = 10000;
+		boolean flag1;
+		// 随机压大小
+		Random random = new Random();
+		int a = random.nextInt(1);
+
+		for (int i = 0; i < 10; i++) {
+			flag1 = Lab3_5.judgeDice();
+			if (a == 1 && flag1 == true || a == 0 && flag1 == false) {
+				total += 800;
+			} else {
+				total -= 1000;
+
+			}
+		}
+
+		// 输出结果
+		System.out.println("剩余的游戏币：" + total);
+	}
+
 }

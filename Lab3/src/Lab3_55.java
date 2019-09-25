@@ -12,36 +12,36 @@
 import java.util.Random;
 
 public class Lab3_55 {
-	
+
 	public static void main(String[] args) {
-		
+
 		Random random = new Random();
 		boolean flag = true;
 		int total = 10000;
-		
-		for(int i=0;i<10;i++) {
-			//扔骰子
-			int sum=0;
-			for(int j=0;j<3;j++) {
-				int s = random.nextInt(5)+1;
+
+		for (int i = 0; i < 10; i++) {
+			// 扔骰子
+			int sum = 0;
+			for (int j = 0; j < 3; j++) {
+				int s = random.nextInt(6) + 1;
 				sum += s;
 			}
-			//判断大小
-			if(sum>=10) {
+			// 判断大小
+			if (sum >= 10) {
 				flag = true;
-			}else {
+			} else {
 				flag = false;
 			}
-			//买大小并判断正误
+			// 买大小并判断正误
 			int a = random.nextInt(1);
-			if(a==1&&flag==true || a==0&&flag==false) {
+			if (a == 1 && flag == true || a == 0 && flag == false) {
 				total += 800;
-			}else {
-				total -=1000;
+			} else {
+				total -= 1000;
 			}
 		}
-		
-		//输出结果
+
+		// 输出结果
 		System.out.println("剩余的游戏币：" + total);
 
 	}
