@@ -1,109 +1,125 @@
+import javax.swing.JComboBox;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Container;
-import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.security.acl.Group;
-import java.sql.Connection;
 
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
+import javax.swing.*;
+import javax.swing.JList;
+import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 
-public class Lab9_3 extends JFrame{
-
+public class Lab9_3 extends JFrame {
 	public Lab9_3() {
-		Container container=getContentPane();
+		Container container = getContentPane();
 		setLayout(null);
-		final JRadioButton jr1=new JRadioButton();
-		final JRadioButton jr2=new JRadioButton();
-		final JLabel jl1=new JLabel();
-		final JButton btn1=new JButton("提交");
-		
-		final JLabel jlT=new JLabel("<html><body><h1 color='red'>问卷调查</h1></body></html>");
-		jlT.setBounds(150,10,100,30);
+
+		// 用户注册
+		final JLabel jlT = new JLabel("<html><body><h1 color='blue'>用户注册</h1></body></html>");
+		jlT.setBounds(150, 10, 100, 30);
 		container.add(jlT);
-		
-		jr1.setText("男");
-		jr1.setSelected(true);
-		jr1.setBounds(100,50,100,30);
-		
-		jr2.setText("女");
-		jr2.setBounds(100,90,100,30);
-		ButtonGroup bg1=new ButtonGroup();
-		bg1.add(jr1);
-		bg1.add(jr2);		
-		container.add(jr1);
-		container.add(jr2);
-		
-		JLabel jl2=new JLabel("爱好：");
-		jl2.setBounds(100,120,100,40);
-		container.add(jl2);
-		
-		final JPanel jp1=new JPanel();
-		jp1.setBounds(100,150,200,100);		
-		jp1.setLayout(new GridLayout(2,2,25,25));
+
+		// 姓名
+		JLabel nameJLabel = new JLabel("用户名：");
+		nameJLabel.setBounds(100, 50, 50, 30);
+		JTextField jTname = new JTextField();
+		jTname.setBounds(150, 50, 100, 30);
+
+		JLabel passwJLabel = new JLabel("密码：");
+		passwJLabel.setBounds(100, 100, 50, 30);
+		JPasswordField jPasswordField = new JPasswordField();
+		jPasswordField.setBounds(150, 100, 100, 30);
+
+		container.add(nameJLabel);
+		container.add(passwJLabel);
+		container.add(jTname);
+		container.add(jPasswordField);
+
+		// 性别 单选框
+		JRadioButton jrman = new JRadioButton();
+		JRadioButton jrwoman = new JRadioButton();
+		jrman.setBounds(150, 150, 50, 30);
+		jrwoman.setBounds(200, 150, 50, 30);
+		jrman.setText("男");
+		jrwoman.setText("女");
+		ButtonGroup bGroup = new ButtonGroup();
+		bGroup.add(jrman);
+		bGroup.add(jrwoman);
+		container.add(jrman);
+		container.add(jrwoman);
+
+		// 爱好 复选框
+		JLabel jLlike = new JLabel("爱好:");
+		jLlike.setBounds(100, 200, 30, 30);
+		container.add(jLlike);
+
+		final JPanel jp1 = new JPanel();
+		jp1.setBounds(150, 200, 200, 100);
+		jp1.setLayout(new GridLayout(2, 2, 25, 25));
 		container.add(jp1);
-		
-		String arr[]={"音乐","运动","阅读","旅行"};
-		
-		for(int i=0;i<arr.length;i++)
-		{
-			JCheckBox jcb1=new JCheckBox(arr[i]);
+
+		String arr[] = { "音乐", "运动", "阅读", "旅行" };
+
+		for (int i = 0; i < arr.length; i++) {
+			JCheckBox jcb1 = new JCheckBox(arr[i]);
 			jp1.add(jcb1);
-		}		
-				
-		btn1.setBounds(100,250,100,30);
-		container.add(btn1);
-		btn1.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent arg0) {	
-				String s1="";
-				String s2="";
-				if(jr1.isSelected())
-					s1="先生";
-				else {
-					s1="女士";
-				}
-			
-				Component cps[]=jp1.getComponents();
-				for (Component cp : cps)
-				{
-					if(cp instanceof JCheckBox)
-					{
-						JCheckBox jcb=(JCheckBox)cp;
-						if(jcb.isSelected())
-							s2+=jcb.getText()+" ";
-					}
-					
-				}
-				String str="<html><body><h1>调查结果</h1><p>";
-				str+= s1+"，早上好！</p>";
-				str+="<p>您的爱好是："+s2+"</p>";
-				str+="</body></html>";
-				jl1.setText(str);
-			}
-		});
-		
-		jl1.setBounds(100,280,200,100);
-		container.add(jl1);
-		
-		setBounds(300,300,400,450);
-		setVisible(true);		
-		
+		}
+
+		// 学制 下拉列表
+		JLabel studyJLabel = new JLabel("请选择学制：");
+		studyJLabel.setBounds(50, 330, 75, 30);
+		container.add(studyJLabel);
+
+		String[] stuStrings = { "研究生", "本科生", "专科生" };
+		JComboBox<String> stuBox = new JComboBox<String>(stuStrings);
+		stuBox.setBounds(150, 330, 100, 30);
+		container.add(stuBox);
+
+		// 校区 列表框
+		JLabel placeJLabel = new JLabel("校区：");
+		placeJLabel.setBounds(90, 370, 40, 30);
+		container.add(placeJLabel);
+
+		String[] placeStrings = { "五山", "南海", "大学城" };
+		JList<String> placeJList = new JList<String>(placeStrings);
+		placeJList.setBounds(150, 370, 100, 70);
+		container.add(placeJList);
+
+		// 自我介绍 文本域
+		JPanel jPanel = new JPanel();
+		JLabel woJLabel = new JLabel("自我介绍：");
+		woJLabel.setBounds(70, 480, 60, 30);
+		container.add(woJLabel);
+
+		JTextArea woArea = new JTextArea(5, 30);
+		woArea.setBackground(Color.white);
+		woArea.setLineWrap(true); // 自动换行
+
+		JScrollPane jsp = new JScrollPane(woArea);
+		jsp.setBounds(150, 480, 120, 80);
+//		container.add(woArea);	//woArea已经被添加了
+		container.add(jsp);
+
+		// 提交
+		JButton jButton = new JButton("提交");
+		jButton.setBounds(150, 580, 100, 30);
+		container.add(jButton);
+
+		// 背景设置
+		// container.setBackground(Color.white);
+		setVisible(true);
+		setBounds(300, 300, 400, 650);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+		setLocationRelativeTo(null);
+
 	}
 
 	public static void main(String[] args) {
-		new Lab9_3();
-		
+		new Lab9_1();
 
 	}
 
