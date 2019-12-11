@@ -9,45 +9,45 @@ import java.util.List;
 //LinkedList：查询慢，插入和删除快
 
 public class Lab10_4 {
-		//测试arrayList插入速度和LinkedList插入速度
-		//插入数据20万条 
-		public static void testArrayList() {
-			List<Integer> list =new ArrayList<Integer>();
-			
-			for (int i = 0; i < 20000; i++) {
-				list.add(i);
-			}
-			long startTime = System.currentTimeMillis();
-			for (int i = 0; i < 200000; i++) {
-				list.add(100, i);
-			}
-			//System.out.println(list.size());
-			//计时器
-			long endTime = System.currentTimeMillis();
-			int time=(int) (endTime - startTime);
-			System.err.println("arrayList:插入数据:"+list.size()+" 运行时间:" + time + "ms");
+	// 测试arrayList插入速度和LinkedList插入速度
+	// 插入数据20万条
+	public static void testArrayList() {
+		List<Integer> list = new ArrayList<Integer>();
+
+		for (int i = 0; i < 20000; i++) {
+			list.add(i);
 		}
-		
-		//插入数据20万条 
-		public static void testLinkedList() {
-			List<Integer> list =new LinkedList<Integer>();
-			for (int i = 0; i < 20000; i++) {
-				list.add(i);
-			}
-			long startTime = System.currentTimeMillis();
-			for (int i = 0; i < 200000; i++) {
-				list.add(100, i);
-			}
-			//System.out.println(list.size());
-			//计时器
-			long endTime = System.currentTimeMillis();
-			int time=(int) (endTime - startTime);
-			System.err.println("linkedList:插入数据:"+list.size()+" 运行时间:" + time + "ms");
+		long startTime = System.currentTimeMillis();
+		for (int i = 0; i < 200000; i++) {
+			list.add(100, i);
 		}
-		
-		public static void main(String[] args) {
-			Lab10_4.testArrayList();
-			Lab10_4.testLinkedList();
+		// System.out.println(list.size());
+		// 计时器
+		long endTime = System.currentTimeMillis();
+		int time = (int) (endTime - startTime);
+		System.err.println("arrayList:插入数据:" + list.size() + " 运行时间:" + time + "ms");
+	}
+
+	// 插入数据20万条
+	public static void testLinkedList() {
+		List<Integer> list = new LinkedList<Integer>();
+		for (int i = 0; i < 20000; i++) {
+			list.add(i);
 		}
+		long startTime = System.currentTimeMillis();
+		for (int i = 0; i < 200000; i++) {
+			list.add(100, i);
+		}
+		// System.out.println(list.size());
+		// 计时器
+		long endTime = System.currentTimeMillis();
+		int time = (int) (endTime - startTime);
+		System.err.println("linkedList:插入数据:" + list.size() + " 运行时间:" + time + "ms");
+	}
+
+	public static void main(String[] args) {
+		Lab10_4.testArrayList();
+		Lab10_4.testLinkedList();
+	}
 
 }
